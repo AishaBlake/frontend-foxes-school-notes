@@ -7,24 +7,19 @@ h1 {
 	text-align: center;
 }
 
-#left-container {
+#left-container, #right-container {
 	background-color: #eee;
 	width: 15%;
-	left: 0px;
 	top: 0px;
 	position: absolute;
 	height: 100%;
 	padding: 10px;
 }
-
+#left-container {
+	left: 0px;
+}
 #right-container {
-	background-color: #eee;
-	width: 15%;
 	right: 0px;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
 }
 
 .plant-holder {
@@ -83,6 +78,26 @@ h1 {
 	left: 20%;
 	opacity: 0.7;
 	z-index: -1;
+}
+
+.jar-glossy-short, .jar-glossy-long {
+	position: absolute;
+	background-color: #e3fcff;
+	border-radius: 16px;
+	opacity: 0.5;
+	left: 10%;
+	width: 15px;
+	z-index: 5;
+}
+
+.jar-glossy-short {
+	height: 5%;
+	bottom: 65%;
+}
+
+.jar-glossy-long {
+	height: 40%;
+	bottom: 20%;
 }
 
 /* body {
