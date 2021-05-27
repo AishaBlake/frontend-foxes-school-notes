@@ -12,14 +12,32 @@
     <template id="login">
       <h1>Bank App</h1>
       <section>
-        <a href="/dashboard" onclick="onLinkClick()">Login</a>
+        <h2>Login</h2>
+        <form id="loginForm">
+          <label for="username">Username</label>
+          <input id="username" name="user" type="text">
+          <button>Login</button>
+        </form>
+        <hr/>
+        <h2>Register</h2>
+        <form id="registerForm" action="javascript:register()">
+          <label for="user">Username (required)</label>
+          <input id="user" name="user" type="text" maxlength="20" required>
+          <label for="currency">Currency (required)</label>
+          <input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+          <label for="description">Description</label>
+          <input id="description" name="description" maxlength="100" type="text">
+          <label for="balance">Current balance</label>
+          <input id="balance" name="balance" type="number" value="0">
+          <button>Register</button>
+        </form>
       </section>
     </template>
 
     <template id="dashboard">
       <header>
         <h1>Bank App</h1>
-        <a href="/login" onclick="onLinkClick()">Logout</a>
+        <a href="/login" onclick="onLinkClick(event)">Logout</a>
       </header>
       <section>
         Balance: 100$
