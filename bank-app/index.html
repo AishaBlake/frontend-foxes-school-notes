@@ -13,9 +13,10 @@
       <h1>Bank App</h1>
       <section>
         <h2>Login</h2>
-        <form id="loginForm">
+        <form id="loginForm" action="javascript:login()">
           <label for="username">Username</label>
           <input id="username" name="user" type="text">
+          <div id="loginError" role="alert"></div>
           <button>Login</button>
         </form>
         <hr/>
@@ -40,8 +41,9 @@
         <a href="/login" onclick="onLinkClick(event)">Logout</a>
       </header>
       <section>
-        Balance: 100$
+        Balance: <span id="balance"></span><span id="currency"></span>
       </section>
+      <h2 id="description"></h2>
       <section>
         <h2>Transactions</h2>
         <table>
@@ -52,9 +54,17 @@
               <th>Amount</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody id="transactions"></tbody>
         </table>
       </section>
+    </template>
+
+    <template id="transaction">
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
     </template>
   </body>
 </html>
