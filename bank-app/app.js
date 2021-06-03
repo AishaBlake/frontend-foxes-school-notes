@@ -1,13 +1,29 @@
 const routes = {
   '/login': { 
-    templateId: 'login' 
+    templateId: 'login',
+    title: 'Login'
   },
   '/dashboard': { 
-    templateId: 'dashboard' 
+    templateId: 'dashboard',
+    title: 'Dashboard',
+    init: refresh
   },
 };
 
-let account = null;
+const storageKey = 'savedAccount';
+
+let state = Object.freeze({
+  account: null
+});
+
+function updateState(property, newData) {
+  state = Object.freeze({
+    ...state,
+    [property]: newData
+  });
+
+  localStorage.setItem(storageKey, JSON.stringify(state.account));
+}
 
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
@@ -30,6 +46,12 @@ function updateRoute() {
   const app = document.getElementById('app');
   app.innerHTML = '';
   app.appendChild(view);
+
+  if (typeof route.init === 'function') {
+    route.init();
+  }
+
+  document.title = route.title;
 }
 
 function navigate(path) {
@@ -42,8 +64,10 @@ function onLinkClick(event) {
   navigate(event.target.href);
 }
 
-window.onpopstate = () => updateRoute();
-updateRoute();
+async function refresh() {
+  await updateAccountData();
+  updateDashboard();
+}
 
 async function login() {
   const loginForm = document.getElementById('loginForm')
@@ -54,7 +78,7 @@ async function login() {
     return updateElement('loginError', data.error);
   }
 
-  account = data;
+  updateState('account', data);
   navigate('/dashboard');
   updateDashboard();
 }
@@ -68,6 +92,21 @@ async function getAccount(user) {
   }
 }
 
+async function updateAccountData() {
+  const account = state.account;
+  if (!account) {
+    return logout();
+  }
+
+  const data = await getAccount(account.user);
+  if (data.error) {
+    return logout();
+  }
+
+  updateState('account', data);
+}
+
+
 async function register() {
   const registerForm = document.getElementById('registerForm');
   const formData = new FormData(registerForm);
@@ -80,6 +119,7 @@ async function register() {
     return console.log('An error occured:', result.error);
   }
 
+  updateState('account', result);
   console.log('Account created!', result);
   navigate('/dashboard');
   updateDashboard();
@@ -99,8 +139,11 @@ async function createAccount(account) {
 }
 
 function updateDashboard() {
+  const account = state.account;
+  console.log("update dashboard: " + account);
+
   if (!account) {
-    return navigate('/login');
+    return logout();
   }
 
   updateElement('description', account.description);
@@ -124,3 +167,21 @@ function createTransactionRow(transaction) {
   tr.children[2].textContent = transaction.amount.toFixed(2);
   return transactionRow;
 }
+
+function logout() {
+  updateState('account', null);
+  navigate('/login');
+}
+
+function init() {
+  const savedAccount = localStorage.getItem(storageKey);
+
+  if (savedAccount) {
+    updateState('account', JSON.parse(savedAccount));
+  }
+
+  window.onpopstate = () => updateRoute();
+  updateRoute();
+}
+
+init();
