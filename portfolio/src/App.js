@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
     setHero({ ...heroData });
     setAbout({ ...aboutData });
-    setProject({ ...projectsData });
+    setProject([ ...projectsData ]);
     setContact({ ...contactData });
     setFooter({ ...footerData });
   }, []);

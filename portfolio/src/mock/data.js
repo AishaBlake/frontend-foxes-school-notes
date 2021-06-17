@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 
 // Head data
 export const headData = {
-    title: 'Name | Developer', // e.g: 'Name | Developer'
+    title: 'Aisha Blake | Developer Relations Engineer', // e.g: 'Name | Developer'
     description: 'Welcome to my portfolio', // e.g: Welcome to my website
   };
   
@@ -28,29 +28,27 @@ export const headData = {
     {
       id: nanoid(),
       img: 'project.jpg',
-      title: '',
-      info: '',
-      info2: '',
-      url: '',
-      repo: '', // if no repo, the button will not show up
+      title: 'Aisha Codes',
+      info: 'Part blog, part shop, part speaker bio',
+      url: 'https://aisha.codes/',
+      repo: 'https://github.com/AishaBlake/aisha-codes',
+      category: 'personal'
     },
     {
       id: nanoid(),
       img: 'project.jpg',
-      title: '',
-      info: '',
-      info2: '',
-      url: '',
-      repo: '', // if no repo, the button will not show up
+      title: '<title of conf>',
+      info: 'A musical tech conference',
+      url: 'https://www.titleofconf.org/',
+      repo: 'https://github.com/AishaBlake/title-of-conf', // if no repo, the button will not show up
     },
     {
       id: nanoid(),
       img: 'project.jpg',
-      title: '',
-      info: '',
-      info2: '',
+      title: 'Frontend Foxes School Notes',
+      info: 'Notes & code for students',
       url: '',
-      repo: '', // if no repo, the button will not show up
+      repo: 'https://github.com/AishaBlake/frontend-foxes-school-notes', // if no repo, the button will not show up
     },
   ];
   

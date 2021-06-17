@@ -1,7 +1,7 @@
 const Resume = () => {
     return (
       <div>
-        // ...
+        
       </div>
     );
   }
